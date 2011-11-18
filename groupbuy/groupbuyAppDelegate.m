@@ -61,8 +61,8 @@ NSString* GlobalGetServerURL()
 {
 //   return @"http://192.168.1.101:8000/api/i?";
 
-   return @"http://192.168.1.188:8000/api/i?";
-//    return @"http://uhz001030.chinaw3.com/api/i?";
+//   return @"http://192.168.1.188:8000/api/i?";
+    return @"http://uhz001030.chinaw3.com/api/i?";
     
 
 //    return @"http://www.dipan100.com:8000/api/i?";
@@ -195,13 +195,13 @@ enum
 	NSMutableArray* controllers = [[NSMutableArray alloc] init];
     
 	[UIUtils addViewController:[TopScoreController alloc]
-					 viewTitle:@"排行榜"
+					 viewTitle:@"总排行榜"
 					 viewImage:@"tu_06.png"
 			  hasNavController:YES			
 			   viewControllers:controllers];	
 
 	[UIUtils addViewController:[CategoryController alloc]
-					 viewTitle:@"分类"
+					 viewTitle:@"分类排行"
 					 viewImage:@"tu_07.png"
 			  hasNavController:YES			
 			   viewControllers:controllers];	
@@ -222,14 +222,14 @@ enum
     
     if ([userService hasBindAccount]){
         [UIUtils addViewController:[MyInfoController alloc]
-                         viewTitle:@"设置"
+                         viewTitle:@"设置·支持"
                          viewImage:@"tu_13.png"
                   hasNavController:YES			
                    viewControllers:controllers];	        
     }
     else{
         [UIUtils addViewController:[RegisterController alloc]
-                         viewTitle:@"设置"
+                         viewTitle:@"设置·支持"
                          viewImage:@"tu_13.png"
                   hasNavController:YES			
                    viewControllers:controllers];	

@@ -31,8 +31,8 @@
 @class ShoppingListController;
 
 #define _THREE20_		1
-#define kAppId			@"481250437"					// To be changed for each project
-#define kMobClickKey	@"4ec3cc6052701573d1000003"		// To be changed for each project
+#define kAppId			@"481943407"					// To be changed for each project
+#define kMobClickKey	@"4ec5f9f752701577ae000080"		// To be changed for each project
 
 #define MAKE_FRIEND_PLACEID @"GroupBuy"
 

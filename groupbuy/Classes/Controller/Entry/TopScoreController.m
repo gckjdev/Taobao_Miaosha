@@ -10,6 +10,8 @@
 #import "ProductPriceDataLoader.h"
 #import "PPSegmentControl.h"
 #import "DeviceDetection.h"
+#import "StringUtil.h"
+#import "GroupBuyNetworkConstants.h"
 
 enum TOP_SCORE_TYPE {
     TOP_0_10,
@@ -89,7 +91,7 @@ enum TOP_SCORE_TYPE {
 
 - (void)viewDidLoad
 {
-    self.categoryId = @"100";     // category for all Taobao Miaosha
+    self.categoryId = [NSString stringWithInt:CATEGORY_TAOBAO_MIAOSHA];     // category for all Taobao Miaosha
     
     NSArray *titleArray = 
      [NSArray arrayWithObjects:

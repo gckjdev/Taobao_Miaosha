@@ -13,6 +13,7 @@
 #import "GroupBuyNetworkConstants.h"
 #import "groupbuyAppDelegate.h"
 #import "GroupBuyControllerExt.h"
+#import "GroupBuyNetworkConstants.h"
 
 @implementation CategoryController
 
@@ -39,7 +40,7 @@
 {
     [self showActivityWithText:@"加载数据中..."];
     CategoryService *service = GlobalGetCategoryService();
-    [service getAllCategory:self];    
+    [service getAllCategory:self categoryType:CATEGORY_TAOBAO_MIAOSHA];    
 }
 
 - (void)getAllCategoryFinish:(int)result jsonArray:(NSArray *)jsonArray
@@ -62,14 +63,12 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view from its nib.
-    [self loadCategory];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     if (self.dataList == nil){
-        CategoryService *service = GlobalGetCategoryService();
-        [service getAllCategory:self];
+        [self loadCategory];
     }
     
     [super viewDidAppear:animated];

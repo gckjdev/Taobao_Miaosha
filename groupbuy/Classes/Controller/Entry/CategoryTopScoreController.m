@@ -14,8 +14,8 @@
 enum TOP_SCORE_TYPE {
     TOP_0_10,
     TOP_10,
+    TOP_END,
     TOP_NEW,
-    TOP_DISTANCE
 };
 
 #define TOP_Y       25
@@ -27,7 +27,7 @@ enum TOP_SCORE_TYPE {
 @synthesize belowTenController;
 @synthesize aboveTenController;
 @synthesize topNewController;
-@synthesize distanceController;
+@synthesize endDateController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,14 +56,14 @@ enum TOP_SCORE_TYPE {
         case TOP_0_10:
         {
             self.aboveTenController = nil;
-            self.distanceController = nil;
+            self.endDateController = nil;
             self.topNewController = nil;
         }
             break;
         case TOP_10:
         {
             self.belowTenController = nil;
-            self.distanceController = nil;
+            self.endDateController = nil;
             self.topNewController = nil;            
         }
             break;
@@ -71,10 +71,10 @@ enum TOP_SCORE_TYPE {
         {
             self.belowTenController = nil;
             self.aboveTenController = nil;
-            self.distanceController = nil;
+            self.endDateController = nil;
         }
             break;
-        case TOP_DISTANCE:
+        case TOP_END:
         {
             self.belowTenController = nil;
             self.aboveTenController = nil;
@@ -102,8 +102,8 @@ enum TOP_SCORE_TYPE {
     NSArray *titleArray = [NSArray arrayWithObjects:
                            @"0－10元", 
                            @"10元以上", 
+                           @"结束日期", 
                            @"发布日期", 
-                           // @"周边附近", 
                            nil];
     
     UIImage *bgImage = [UIImage strectchableImageName:@"tu_46.png"];
@@ -154,7 +154,7 @@ enum TOP_SCORE_TYPE {
     [self.belowTenController.view setHidden:YES];
     [self.aboveTenController.view setHidden:YES];
     [self.topNewController.view setHidden:YES];
-    [self.distanceController.view setHidden:YES];
+    [self.endDateController.view setHidden:YES];
     [view setHidden:NO];
     [self.view bringSubviewToFront:view];
 }
@@ -167,7 +167,7 @@ enum TOP_SCORE_TYPE {
         ProductTopScoreBelowTenDataLoader *dataLoader = [[[ProductTopScoreBelowTenDataLoader alloc] init] autorelease];
         dataLoader.categoryId = self.categoryId;
         self.belowTenController.dataLoader = dataLoader;
-        self.distanceController.type = [titlePPSegControl titleForSegmentAtIndex:
+        self.endDateController.type = [titlePPSegControl titleForSegmentAtIndex:
                                         [titlePPSegControl selectedSegmentIndex]];
         CGRect bounds = self.view.bounds;
         self.belowTenController.view.frame = CGRectMake(0, TOP_Y, bounds.size.width, bounds.size.height - TOP_Y);        
@@ -186,7 +186,7 @@ enum TOP_SCORE_TYPE {
         ProductTopScoreAboveTenDataLoader *dataLoader = [[[ProductTopScoreAboveTenDataLoader alloc] init] autorelease];
         dataLoader.categoryId = self.categoryId;
         self.aboveTenController.dataLoader = dataLoader;
-        self.distanceController.type = [titlePPSegControl titleForSegmentAtIndex:
+        self.endDateController.type = [titlePPSegControl titleForSegmentAtIndex:
                                         [titlePPSegControl selectedSegmentIndex]];
         CGRect bounds = self.view.bounds;
         self.aboveTenController.view.frame = CGRectMake(0, TOP_Y, bounds.size.width, bounds.size.height - TOP_Y);         
@@ -205,7 +205,7 @@ enum TOP_SCORE_TYPE {
         ProductStartDateDataLoader *dataLoader = [[[ProductStartDateDataLoader alloc] init] autorelease];
         dataLoader.categoryId = self.categoryId;
         self.topNewController.dataLoader = dataLoader;
-        self.distanceController.type = [titlePPSegControl titleForSegmentAtIndex:
+        self.endDateController.type = [titlePPSegControl titleForSegmentAtIndex:
                                         [titlePPSegControl selectedSegmentIndex]];
         CGRect bounds = self.view.bounds;
         self.topNewController.view.frame = CGRectMake(0, TOP_Y, bounds.size.width, bounds.size.height - TOP_Y);        
@@ -216,23 +216,23 @@ enum TOP_SCORE_TYPE {
     [self.topNewController viewDidAppear:NO];
 }
 
-- (void)showProductByDistance
+- (void)showProductByEndDate
 {
-    if (self.distanceController == nil){
-        self.distanceController = [[[CommonProductListController alloc] init] autorelease];        
-        self.distanceController.superController = self;
-        ProductDistanceDataLoader *dataLoader = [[[ProductDistanceDataLoader alloc] init] autorelease];
+    if (self.endDateController == nil){
+        self.endDateController = [[[CommonProductListController alloc] init] autorelease];        
+        self.endDateController.superController = self;
+        ProductEndDateDataLoader *dataLoader = [[[ProductEndDateDataLoader alloc] init] autorelease];
         dataLoader.categoryId = self.categoryId;
-        self.distanceController.dataLoader = dataLoader;
-        self.distanceController.type = [titlePPSegControl titleForSegmentAtIndex:
+        self.endDateController.dataLoader = dataLoader;
+        self.endDateController.type = [titlePPSegControl titleForSegmentAtIndex:
                                         [titlePPSegControl selectedSegmentIndex]];        
         CGRect bounds = self.view.bounds;
-        self.distanceController.view.frame = CGRectMake(0, TOP_Y, bounds.size.width, bounds.size.height - TOP_Y);         
-        [self.view addSubview:distanceController.view];                
+        self.endDateController.view.frame = CGRectMake(0, TOP_Y, bounds.size.width, bounds.size.height - TOP_Y);         
+        [self.view addSubview:endDateController.view];                
     }
     
-    [self onlyShowView:self.distanceController.view];
-    [distanceController viewDidAppear:NO];
+    [self onlyShowView:self.endDateController.view];
+    [endDateController viewDidAppear:NO];
     
 }
 
@@ -258,8 +258,8 @@ enum TOP_SCORE_TYPE {
         case TOP_NEW:
             [self showTopNew];
             break;
-        case TOP_DISTANCE:
-            [self showProductByDistance];
+        case TOP_END:
+            [self showProductByEndDate];
             break;
         default:
             break;

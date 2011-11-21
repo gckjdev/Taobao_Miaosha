@@ -69,6 +69,16 @@ NSString* GlobalGetServerURL()
 
 }
 
+BOOL GlobalGetEnableAd()
+{
+    return NO;
+}
+
+NSString* GlobalGetEnableAdPubliserId()
+{
+    return nil;
+}
+
 int GlobalGetProductDisplayType()
 {
     return PRODUCT_DISPLAY_TAOBAO;
